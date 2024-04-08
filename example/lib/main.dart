@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:circular_seek_bar/circular_seek_bar.dart';
 import 'package:circular_seek_bar_example/util/text_style.dart';
 import 'package:flutter/material.dart';
@@ -70,6 +72,9 @@ class _CircularSeekBarExamplePageState
               startAngle: _startAngle,
               sweepAngle: _sweepAngle,
               strokeCap: _rounded ? StrokeCap.round : StrokeCap.butt,
+              onProgressChanged: (progress) {
+                log('progress: $progress');
+              },
               progressGradientColors: _useGradient
                   ? [
                       Colors.red,

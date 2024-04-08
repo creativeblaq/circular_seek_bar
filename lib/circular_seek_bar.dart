@@ -87,6 +87,8 @@ class CircularSeekBar extends StatefulWidget {
   /// This ValueNotifier notifies the listener that the seekbar's progress value has changed.
   final ValueNotifier<double>? valueNotifier;
 
+  final Function(double progress)? onProgressChanged;
+
   /// This callback function will execute when Animation is finished.
   final VoidCallback? onEnd;
 
@@ -127,6 +129,7 @@ class CircularSeekBar extends StatefulWidget {
     this.onEnd,
     this.interactive = true,
     this.child,
+    this.onProgressChanged,
   }) : super(key: key);
 
   @override
@@ -258,7 +261,9 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             curve: widget.curves,
             onEnd: widget.onEnd,
             builder: (BuildContext context, double progress, __) {
+              widget.onProgressChanged?.call(progress);
               widget.valueNotifier?.value = progress;
+
               return CustomPaint(
                 size: Size(widget.width, widget.height),
                 painter: _SeekBarPainter(
@@ -291,6 +296,8 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             }),
       );
     } else {
+      widget.onProgressChanged?.call(_progress ?? 0);
+
       widget.valueNotifier?.value = _progress!;
       return GestureDetector(
         key: _key,
