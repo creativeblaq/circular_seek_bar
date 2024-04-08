@@ -185,6 +185,7 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
       setState(() {
         _progress = progress;
       });
+      widget.onProgressChanged?.call(progress);
     }
   }
 
@@ -261,7 +262,6 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             curve: widget.curves,
             onEnd: widget.onEnd,
             builder: (BuildContext context, double progress, __) {
-              widget.onProgressChanged?.call(progress);
               widget.valueNotifier?.value = progress;
 
               return CustomPaint(
@@ -296,8 +296,6 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             }),
       );
     } else {
-      widget.onProgressChanged?.call(_progress ?? 0);
-
       widget.valueNotifier?.value = _progress!;
       return GestureDetector(
         key: _key,
