@@ -255,6 +255,11 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             _handleGesture(details);
           }
         },
+        onPanStart: (details) {
+          if (widget.interactive) {
+            widget.onProgressChanged?.call(_progress ?? 0.0);
+          }
+        },
         onPanEnd: (details) {
           if (widget.interactive) {
             widget.onProgressChanged?.call(_progress ?? 0.0);
@@ -311,6 +316,11 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         onPanUpdate: (details) {
           if (widget.interactive) {
             _handleGesture(details);
+          }
+        },
+        onPanStart: (details) {
+          if (widget.interactive) {
+            widget.onProgressChanged?.call(_progress ?? 0.0);
           }
         },
         onPanEnd: (details) {
