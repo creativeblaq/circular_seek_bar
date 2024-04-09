@@ -72,7 +72,7 @@ class _CircularSeekBarExamplePageState
               startAngle: _startAngle,
               sweepAngle: _sweepAngle,
               strokeCap: _rounded ? StrokeCap.round : StrokeCap.butt,
-              onProgressChanged: (progress) {
+              onProgressChanged: (progress, _) {
                 log('progress: $progress');
               },
               progressGradientColors: _useGradient

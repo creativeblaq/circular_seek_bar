@@ -87,7 +87,7 @@ class CircularSeekBar extends StatefulWidget {
   /// This ValueNotifier notifies the listener that the seekbar's progress value has changed.
   final ValueNotifier<double>? valueNotifier;
 
-  final Function(double progress)? onProgressChanged;
+  final Function(double progress, bool isEnd)? onProgressChanged;
 
   /// This callback function will execute when Animation is finished.
   final VoidCallback? onEnd;
@@ -248,6 +248,7 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         onTapDown: (details) {
           if (widget.interactive) {
             _handleGesture(details);
+            widget.onProgressChanged?.call(_progress ?? 0.0, true);
           }
         },
         onPanUpdate: (details) {
@@ -257,12 +258,12 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         },
         onPanStart: (details) {
           if (widget.interactive) {
-            widget.onProgressChanged?.call(_progress ?? 0.0);
+            widget.onProgressChanged?.call(_progress ?? 0.0, false);
           }
         },
         onPanEnd: (details) {
           if (widget.interactive) {
-            widget.onProgressChanged?.call(_progress ?? 0.0);
+            widget.onProgressChanged?.call(_progress ?? 0.0, true);
           }
         },
         child: TweenAnimationBuilder(
@@ -311,6 +312,7 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         onTapDown: (details) {
           if (widget.interactive) {
             _handleGesture(details);
+            widget.onProgressChanged?.call(_progress ?? 0.0, true);
           }
         },
         onPanUpdate: (details) {
@@ -320,12 +322,12 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         },
         onPanStart: (details) {
           if (widget.interactive) {
-            widget.onProgressChanged?.call(_progress ?? 0.0);
+            widget.onProgressChanged?.call(_progress ?? 0.0, false);
           }
         },
         onPanEnd: (details) {
           if (widget.interactive) {
-            widget.onProgressChanged?.call(_progress ?? 0.0);
+            widget.onProgressChanged?.call(_progress ?? 0.0, true);
           }
         },
         child: CustomPaint(
