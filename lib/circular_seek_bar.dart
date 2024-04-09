@@ -313,6 +313,11 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
             _handleGesture(details);
           }
         },
+        onPanEnd: (details) {
+          if (widget.interactive) {
+            widget.onProgressChanged?.call(_progress ?? 0.0);
+          }
+        },
         child: CustomPaint(
           size: Size(widget.width, widget.height),
           painter: _SeekBarPainter(
