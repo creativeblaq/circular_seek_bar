@@ -185,7 +185,6 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
       setState(() {
         _progress = progress;
       });
-      widget.onProgressChanged?.call(progress);
     }
   }
 
@@ -254,6 +253,11 @@ class _CircularSeekBarState extends State<CircularSeekBar> {
         onPanUpdate: (details) {
           if (widget.interactive) {
             _handleGesture(details);
+          }
+        },
+        onPanEnd: (details) {
+          if (widget.interactive) {
+            widget.onProgressChanged?.call(_progress ?? 0.0);
           }
         },
         child: TweenAnimationBuilder(
